@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public void createUser(User user){
-        String url = "http://localhost:3000/user/create";
+        String url = "http://192.168.1.56:3000/user/create";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         JSONObject jsonObject = user.toJson();
 
