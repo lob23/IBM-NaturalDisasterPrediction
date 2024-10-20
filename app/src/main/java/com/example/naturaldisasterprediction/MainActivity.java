@@ -3,6 +3,7 @@ package com.example.naturaldisasterprediction;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.naturaldisasterprediction.Home.Weather;
 import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.Service.WeatherService;
+import com.example.naturaldisasterprediction.SignUp.RegisterInfo;
 import com.example.naturaldisasterprediction.SignUp.User;
 
 import java.util.List;
@@ -31,13 +33,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        locationText = findViewById(R.id.locationText);
-        addressText = findViewById(R.id.addressText);
-        weatherService = new WeatherService(this);
-        userService = new UserService(this);
-        User user = new User();
-        userService.createUser(user);
-        fetchData(); 
+        Intent i = new Intent(MainActivity.this, RegisterInfo.class);
+        startActivity(i);
+
+//        locationText = findViewById(R.id.locationText);
+//        addressText = findViewById(R.id.addressText);
+//        weatherService = new WeatherService(this);
+//        userService = new UserService(this);
+//        User user = new User();
+//        userService.createUser(user);
+//        fetchData();
 //        setupLocation();
     }
 

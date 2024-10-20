@@ -4,15 +4,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/blue_light">
 
-    <TextView
-        android:layout_width="240dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/decor1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="88dp"
-        android:layout_marginLeft="26dp"
-        android:textColor="@color/black"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="-10dp"
+            android:src="@drawable/cloud1"/>
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="26dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/fredoka_medium"
+            android:text="Tell us about yourself"
+            android:textSize="36sp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/decor1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="65dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutInputName"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        app:boxStrokeColor="@color/blue_mint"
+        app:hintTextColor="@color/blue_mint"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Name"
+            android:maxLines="1"
+            android:textColor="@color/blue_deep"
+            android:shadowColor="@color/blue_deep"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutInputEmail"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutInputName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        app:boxStrokeColor="@color/blue_mint"
+        app:hintTextColor="@color/blue_mint"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Email"
+            android:maxLines="1"
+            android:textColor="@color/blue_deep"
+            android:shadowColor="@color/blue_deep"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutInputDOB"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutInputEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        app:boxStrokeColor="@color/blue_mint"
+        app:hintTextColor="@color/blue_mint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inpuDOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Date of Birth"
+            android:maxLines="1"
+            android:textColor="@color/blue_deep"
+            android:shadowColor="@color/blue_deep"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
