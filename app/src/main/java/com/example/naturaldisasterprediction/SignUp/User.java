@@ -64,6 +64,7 @@ public class User {
     public Float getWeight(){return this.weight; }
     public Float getHeight(){return this.height; }
     public List<User> getFamily(){return this.family; }
+    public String getMail(){ return this.email; }
 
     public JSONObject toJson(){
         JSONObject jsonObject = new JSONObject();

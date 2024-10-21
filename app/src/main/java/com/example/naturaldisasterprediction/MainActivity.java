@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.naturaldisasterprediction.Home.Weather;
 import com.example.naturaldisasterprediction.Service.UserService;
@@ -42,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
 //        userService = new UserService(this);
 //        User user = new User();
 //        userService.createUser(user);
-//        fetchData();
-//        setupLocation();
+//        Toast.makeText(MainActivity.this, "SET USER", Toast.LENGTH_LONG).show();
+      //  fetchData();
+        //setupLocation();
     }
 
     private void fetchData() {

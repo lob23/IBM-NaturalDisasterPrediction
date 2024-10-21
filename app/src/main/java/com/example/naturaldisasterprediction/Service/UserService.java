@@ -50,13 +50,14 @@ public class UserService {
 
     public void createUser(User user){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000")
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://192.168.1.2:3000")
+//                .baseUrl("http://10.0.2.2:3000")
+                .   addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
 
-        requestUser.postUser(new RequestPost(user.getName(), "abc@mail", "123654"))
+        requestUser.postUser(new RequestPost(user.getName(), user.getMail(), "112233"))
                 .enqueue(new Callback<ResponsePost>() {
                     @Override
                     public void onResponse(Call<ResponsePost> call, Response<ResponsePost> response) {

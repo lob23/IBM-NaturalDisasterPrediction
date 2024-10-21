@@ -61,6 +61,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -86,6 +87,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -110,7 +112,7 @@
         app:hintTextColor="@color/blue_mint">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inpuDOB"
+            android:id="@+id/inputDOB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -123,16 +125,47 @@
             android:focusable="false"
             android:clickable="true"
             android:cursorVisible="false"/>
-
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutInputGender"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutInputDOB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        app:boxStrokeColor="@color/blue_mint"
+        app:hintTextColor="@color/blue_mint">
 
-
-
-
-
-
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Gender"
+            android:maxLines="1"
+            android:textColor="@color/blue_deep"
+            android:shadowColor="@color/blue_deep"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/saveUserButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="25dp"
+        android:text="OK"/>
 
 
 
