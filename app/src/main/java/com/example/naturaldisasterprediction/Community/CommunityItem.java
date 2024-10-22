@@ -5,48 +5,47 @@ import android.content.Context;
 import java.io.Serializable;
 
 public class CommunityItem implements Serializable {
-    private String name;
-    private String userID;
-    private String imageResourceId;
-    private String text;
+    private String blogId;
+    private String senderId;
+    private String regionId;
+    private String blogContent;
 
-
-    public CommunityItem(String name, String userID, String imageResourceId, String text) {
-        this.name = name;
-        this.userID = userID;
-        this.imageResourceId = imageResourceId;
-        this.text = text;
+    public CommunityItem(String blogId, String senderId, String regionId, String blogContent) {
+        this.blogId = blogId;
+        this.senderId = senderId;
+        this.regionId = regionId;
+        this.blogContent = blogContent;
     }
 
-    public String getName() {
-        return name;
+    public String getBlogId() {
+        return blogId;
     }
 
-    public String getUserID() {
-        return userID;
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
     }
 
-    public String getImageResourceId() {
-        return imageResourceId;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public String getText() {
-        return text;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getRegionId() {
+        return regionId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
     }
 
-    public void setImageResourceId(String imageResourceId) {
-        this.imageResourceId = imageResourceId;
+    public String getBlogContent() {
+        return blogContent;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setBlogContent(String blogContent) {
+        this.blogContent = blogContent;
     }
 }
