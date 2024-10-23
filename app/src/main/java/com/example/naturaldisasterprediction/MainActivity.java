@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.naturaldisasterprediction.Home.MyLocation;
 import com.example.naturaldisasterprediction.Home.Weather;
+import com.example.naturaldisasterprediction.Models.GPSLocation;
+import com.example.naturaldisasterprediction.Models.User.UserUpdateLocationRequest;
 import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.Service.WeatherService;
 import com.example.naturaldisasterprediction.SignUp.PhoneScreen;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TextView locationText;
     TextView addressText;
     private WeatherService weatherService;
+    private UserService userService;
  //   private UserService userService;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         locationText = findViewById(R.id.locationText);
         addressText = findViewById(R.id.addressText);
         weatherService = new WeatherService(this);
+        userService = new UserService(this);
 //
 //        userService = new UserService(this);
 //        User user = new User();
@@ -100,5 +104,9 @@ public class MainActivity extends AppCompatActivity {
         String city = myLocation.getCity();
         locationText.setText("Longtitude: " + longitude + " Latitude: " + latitude);
         addressText.setText("Address: " + country + ", " + city);
+
+        // Update the user's location in the backend
+        GPSLocation location = new GPSLocation(latitude, longitude, city, country);
+        userService.updateUserLocation(location);
     }
 }
