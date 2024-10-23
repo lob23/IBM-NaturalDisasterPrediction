@@ -7,7 +7,8 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
-public class SharedPreferenceManager <T>{
+public class
+SharedPreferenceManager <T>{
     final private Class<T> type;
     Context context;
     SharedPreferences sharedPreference;
