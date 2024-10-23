@@ -19,6 +19,7 @@ import com.example.naturaldisasterprediction.Models.GPSLocation;
 import com.example.naturaldisasterprediction.Models.User.UserUpdateLocationRequest;
 import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.Service.WeatherService;
+import com.example.naturaldisasterprediction.SignUp.FamilyScreen;
 import com.example.naturaldisasterprediction.SignUp.PhoneScreen;
 import com.example.naturaldisasterprediction.SignUp.RegisterInfo;
 import com.example.naturaldisasterprediction.SignUp.SupportScreen;
@@ -43,21 +44,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //
-//        Intent i = new Intent(MainActivity.this, TestView.class);
-//        startActivity(i);
+        Intent i = new Intent(MainActivity.this, FamilyScreen.class);
+        startActivity(i);
 
         locationText = findViewById(R.id.locationText);
         addressText = findViewById(R.id.addressText);
         weatherService = new WeatherService(this);
         userService = new UserService(this);
 //
-//        userService = new UserService(this);
-//        User user = new User();
-//        userService.createUser(user);
-//        Toast.makeText(MainActivity.this, "SET USER", Toast.LENGTH_LONG).show();
-
-        fetchData();
-        setupLocation();
+//        fetchData();
+//        setupLocation();
     }
 
     private void fetchData() {
