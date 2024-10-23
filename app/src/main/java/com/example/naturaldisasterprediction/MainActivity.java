@@ -14,7 +14,10 @@ import android.widget.Toast;
 import com.example.naturaldisasterprediction.Home.Weather;
 import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.Service.WeatherService;
+import com.example.naturaldisasterprediction.SignUp.PhoneScreen;
 import com.example.naturaldisasterprediction.SignUp.RegisterInfo;
+import com.example.naturaldisasterprediction.SignUp.SupportScreen;
+import com.example.naturaldisasterprediction.SignUp.TestView;
 import com.example.naturaldisasterprediction.SignUp.User;
 
 import java.util.List;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        Intent i = new Intent(MainActivity.this, RegisterInfo.class);
+        Intent i = new Intent(MainActivity.this, TestView.class);
         startActivity(i);
 
 //        locationText = findViewById(R.id.locationText);

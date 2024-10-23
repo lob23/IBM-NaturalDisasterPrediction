@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,8 +40,9 @@ public class RegisterInfo extends AppCompatActivity {
     TextView inputGender;
     User user;
     LocalDate localDate;
-    Button button;
+    TextView button;
     UserService userService = new UserService(this);
+    Boolean fullfill = false;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +52,53 @@ public class RegisterInfo extends AppCompatActivity {
 
         fetchUI();
         handleClickUI();
-//        loadInfo();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        handleButton();
 
-                saveUser();
-                loadInfo();
+    }
 
-                Toast.makeText(RegisterInfo.this, "DONE", Toast.LENGTH_LONG).show();
-            }
-        });
+    private void handleButton() {
+
+        checkInput();
+        if(fullfill){
+            button.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View v) {
+
+                    shareUser();
+                    upUserToServer();
+
+                    Intent i = new Intent(RegisterInfo.this, SupportScreen.class);
+                    startActivity(i);
+                }
+            });
+        }
 
 
     }
 
+    private void checkInput() {
+        String name = inputName.getText().toString().trim();
+        String email = inputEmail.getText().toString().trim();
+        String dob = inputDOB.getText().toString().trim();
+        String gender = inputGender.getText().toString().trim();
+
+        // Check if all fields are filled
+        if (!name.isEmpty() && !email.isEmpty() && !dob.isEmpty() && !gender.isEmpty()) {
+            // Enable the button and change its drawable
+            button.setBackgroundResource(R.drawable.button2);
+            button.setClickable(true); // Make the button clickable
+            button.setTextColor(getResources().getColor(R.color.white));
+            fullfill = true;
+        } else {
+            // Disable the button or reset its background if not all fields are filled
+            button.setBackgroundResource(R.drawable.button1); // or your default button drawable
+            button.setClickable(false);
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void loadInfo() {
+    private void upUserToServer() {
         String gender = inputGender.getText().toString();
         String name = inputName.getText().toString();
         String email = inputEmail.getText().toString();
@@ -78,10 +112,10 @@ public class RegisterInfo extends AppCompatActivity {
             user.setGender(2);
         }
         user.setBirth(localDate);
-        userService.createUser(user);
+//        userService.createUser(user);
     }
 
-    private void saveUser() {
+    private void shareUser() {
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(User.class, this);
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_COLLECTION_USERS);
     }
@@ -152,5 +186,25 @@ public class RegisterInfo extends AppCompatActivity {
         inputName = findViewById(R.id.inputName);
         inputEmail = findViewById(R.id.inputEmail);
         button = findViewById(R.id.saveUserButton);
+
+        // Adding text watchers to detect input changes
+        inputName.addTextChangedListener(inputWatcher);
+        inputEmail.addTextChangedListener(inputWatcher);
+        inputDOB.addTextChangedListener(inputWatcher);
+        inputGender.addTextChangedListener(inputWatcher);
     }
+
+    private final TextWatcher inputWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Call method to check if all fields are filled
+            checkInput();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
 }
