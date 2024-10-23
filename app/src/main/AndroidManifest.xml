@@ -18,6 +18,12 @@
         android:theme="@style/Theme.NaturalDisasterPrediction"
         tools:targetApi="31">
         <activity
+            android:name=".SignUp.CustomRation"
+            android:exported="false" />
+        <activity
+            android:name=".SignUp.QuickRation"
+            android:exported="false" />
+        <activity
             android:name=".SignUp.QuickCustom"
             android:exported="false" />
         <activity

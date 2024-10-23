@@ -15,11 +15,11 @@ public class SuppliersService {
 
     void convertUserToSendUser(User user, SendUser sendUser)
     {
-        LocalDate currentDate = LocalDate.now();
-        sendUser.setHealthName(user.getName());
-        sendUser.setHealthWeight(user.getWeight());
-        sendUser.setHealthHeight(user.getHeight());
-        sendUser.setHealthAge();
+//        LocalDate currentDate = LocalDate.now();
+//        sendUser.setHealthName(user.getName());
+//        sendUser.setHealthWeight(user.getWeight());
+//        sendUser.setHealthHeight(user.getHeight());
+//        sendUser.setHealthAge();
     }
 
 

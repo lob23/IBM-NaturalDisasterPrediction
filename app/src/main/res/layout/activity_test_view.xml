@@ -1,36 +1,22 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <!-- Input for number of family members -->
-    <EditText
-        android:id="@+id/et_family_members"
+    <!-- RecyclerView to display list of items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter number of family members"
-        android:inputType="number" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
 
-    <!-- Button to generate the forms -->
+    <!-- Add button at the bottom -->
     <Button
-        android:id="@+id/btn_generate_forms"
+        android:id="@+id/btn_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Generate Forms" />
-
-    <!-- ScrollView to hold the dynamic forms -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <!-- This LinearLayout will hold all the dynamic forms -->
-        <LinearLayout
-            android:id="@+id/ll_family_forms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        android:text="Add"
+        android:textAllCaps="false" />
 </LinearLayout>

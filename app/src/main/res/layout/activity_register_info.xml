@@ -69,8 +69,8 @@
             android:fontFamily="@font/fredoka"
             android:hint="Name"
             android:maxLines="1"
-            android:textColor="@color/blue_deep"
-            android:shadowColor="@color/blue_deep"/>
+            android:textColor="@color/blue_text"
+            android:shadowColor="@color/blue_text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -95,8 +95,8 @@
             android:fontFamily="@font/fredoka"
             android:hint="Email"
             android:maxLines="1"
-            android:textColor="@color/blue_deep"
-            android:shadowColor="@color/blue_deep"/>
+            android:textColor="@color/blue_text"
+            android:shadowColor="@color/blue_text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -120,8 +120,8 @@
             android:fontFamily="@font/fredoka"
             android:hint="Date of Birth"
             android:maxLines="1"
-            android:textColor="@color/blue_deep"
-            android:shadowColor="@color/blue_deep"
+            android:textColor="@color/blue_text"
+            android:shadowColor="@color/blue_text"
             android:inputType="none"
             android:focusable="false"
             android:clickable="true"
@@ -149,8 +149,8 @@
             android:fontFamily="@font/fredoka"
             android:hint="Gender"
             android:maxLines="1"
-            android:textColor="@color/blue_deep"
-            android:shadowColor="@color/blue_deep"
+            android:textColor="@color/blue_text"
+            android:shadowColor="@color/blue_text"
             android:inputType="none"
             android:focusable="false"
             android:clickable="true"
