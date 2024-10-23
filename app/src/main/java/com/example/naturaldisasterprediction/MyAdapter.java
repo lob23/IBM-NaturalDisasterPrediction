@@ -5,9 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
 
@@ -31,8 +34,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         // Update the item title based on its position (1-based index)
-        String title = "Item " + (position + 1);
+        String title = "Member " + (position + 1);
         holder.title.setText(title);
+
+        // Set initial height and weight values
+        holder.heightValue.setText("0 cm");
+        holder.weightValue.setText("0 kg");
+
+        // Listen for changes in the height slider and update the height value TextView
+        holder.sliderHeight.addOnChangeListener((slider, value, fromUser) -> {
+            holder.heightValue.setText(String.format("%.0f cm", value));
+        });
+
+        // Listen for changes in the weight slider and update the weight value TextView
+        holder.sliderWeight.addOnChangeListener((slider, value, fromUser) -> {
+            holder.weightValue.setText(String.format("%.0f kg", value));
+        });
 
         // Delete button functionality
         holder.btnDelete.setOnClickListener(v -> {
@@ -51,17 +68,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        EditText inputHeight, inputWeight, inputAge, inputGender;
-        Button btnDelete;
+        TextView title, heightValue, weightValue;
+        Slider sliderHeight, sliderWeight;
+        ImageView btnDelete;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            inputHeight = itemView.findViewById(R.id.adapterHeight);
-            inputWeight = itemView.findViewById(R.id.adapterWeight);
-            inputAge = itemView.findViewById(R.id.adapterAge);
-            inputGender = itemView.findViewById(R.id.adapterGender);
+            heightValue = itemView.findViewById(R.id.heightValue);
+            weightValue = itemView.findViewById(R.id.weightValue);
+            sliderHeight = itemView.findViewById(R.id.sliderHeight);
+            sliderWeight = itemView.findViewById(R.id.sliderWeight);
             btnDelete = itemView.findViewById(R.id.btn_delete);
         }
     }
