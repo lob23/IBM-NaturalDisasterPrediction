@@ -51,9 +51,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UserService {
     private Context context;
     private User user;
+    private static final String PREFS_NAME = "UserPrefs";
+    private static final String USER_ID_KEY = "UserId";
 
     public UserService(Context context){
         this.context = context;
+    }
+
+    private void saveUserIdToLocal(String userId) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_ID_KEY, userId);
+        editor.apply();
+    }
+
+    public String getUserIdFromLocal() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(USER_ID_KEY, null);
     }
 
     interface RequestUser{
@@ -81,10 +95,8 @@ public class UserService {
                         if (response.isSuccessful() && response.body() != null) {
                             // Save user id to shared preferences
                             String userId = response.body().getUserId();
-                            SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(USER_ID_KEY, userId);
-                            editor.apply();
+                            Log.d("USER ID", userId);
+                            saveUserIdToLocal(userId);
                         }
                     }
 
@@ -98,8 +110,7 @@ public class UserService {
     public void updateUserLocation(GPSLocation location) {
 
         // Get user id from shared preferences
-        SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString(USER_ID_KEY,  null);
+        String userId = getUserIdFromLocal();
 
         // If user id is null, return
         if (userId == null) {
