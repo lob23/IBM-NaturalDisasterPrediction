@@ -31,6 +31,7 @@ import com.example.naturaldisasterprediction.SignUp.RegisterInfo;
 import com.example.naturaldisasterprediction.SignUp.SupportScreen;
 import com.example.naturaldisasterprediction.SignUp.TestView;
 import com.example.naturaldisasterprediction.SignUp.User;
+import com.google.firebase.FirebaseApp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private WeatherService weatherService;
     private UserService userService;
     private SuppliersService suppliersService;
+
  //   private UserService userService;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

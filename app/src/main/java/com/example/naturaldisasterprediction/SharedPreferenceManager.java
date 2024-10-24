@@ -12,10 +12,20 @@ SharedPreferenceManager <T>{
     final private Class<T> type;
     Context context;
     SharedPreferences sharedPreference;
+    SharedPreferences.Editor editor;
 
     public SharedPreferenceManager(Class<T> type, Context context){
         this.type = type;
         this.context = context;
+    }
+
+    public void saveString(String key, String value) {
+        editor.putString(key, value);
+        editor.apply(); // Apply changes
+    }
+
+    public String getString(String key) {
+        return sharedPreference.getString(key, null); // Return null if key not found
     }
 
     public boolean storeSerializableObjectToSharedPreference(T object, String key){

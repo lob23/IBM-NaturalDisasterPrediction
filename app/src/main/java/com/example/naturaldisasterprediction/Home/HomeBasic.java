@@ -36,9 +36,9 @@ import java.util.List;
 public class HomeBasic extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     MyLocation myLocation;
-    private WeatherService weatherService;
+    public WeatherService weatherService;
     User user;
-    UserService userService;
+    public UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,12 +97,8 @@ public class HomeBasic extends AppCompatActivity {
         String country = myLocation.getCountry();
         String city = myLocation.getCity();
         TextView locationText=findViewById(R.id.locationText);
-//        locationText.setText(myLocation.getCity() + ", " + myLocation.getCountry());
-//
-//        TextView desription = findViewById(R.id.description);
-//        desription.setText("The sky is beautiful in your area, but not everywhere. Let’s help those in need!");
 
-//        userService = new UserService(this);
+
         userService.createUser(user);
         GPSLocation location = new GPSLocation(latitude, longitude, city, country);
         userService.updateUserLocation(location);
