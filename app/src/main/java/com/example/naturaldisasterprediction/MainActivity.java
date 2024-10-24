@@ -16,7 +16,9 @@ import android.widget.Toast;
 import com.example.naturaldisasterprediction.Home.HomeBasic;
 import com.example.naturaldisasterprediction.Home.MyLocation;
 import com.example.naturaldisasterprediction.Home.SendUser;
+import com.example.naturaldisasterprediction.Home.SupplierResponse;
 import com.example.naturaldisasterprediction.Home.Weather;
+import com.example.naturaldisasterprediction.Service.SupplierResponseCallback;
 import com.example.naturaldisasterprediction.Service.SuppliersService;
 import com.example.naturaldisasterprediction.Home.Weather;
 import com.example.naturaldisasterprediction.Models.GPSLocation;
@@ -54,14 +56,16 @@ public class MainActivity extends AppCompatActivity {
 //
         Intent i = new Intent(MainActivity.this, HomeBasic.class);
         startActivity(i);
-
+//
 //        locationText = findViewById(R.id.locationText);
 //        addressText = findViewById(R.id.addressText);
-//        weatherService = new WeatherService(this);
-//        userService = new UserService(this);
-//
-//        fetchData();
-//        setupLocation();
+        weatherService = new WeatherService(this);
+        userService = new UserService(this);
+
+        setupLocation();
+        fetchData();
+
+        testGetSuppliers();
     }
 
     private void fetchData() {
@@ -97,8 +101,25 @@ public class MainActivity extends AppCompatActivity {
             sendUser.setBirth(randomBirthdate);
 
         }
+        Log.d("testGetSuppliers: ", "okay");
         SuppliersService suppliersService = new SuppliersService(user, latitude, longitude, day);
-        suppliersService.sendToServer();
+
+        suppliersService.sendToServer(new SupplierResponseCallback() {
+            @Override
+            public void onSuccess(SupplierResponse response) {
+                Log.d("onResponse: ", response.toString());
+                if (response.getFood() != null) {
+                    for (SupplierResponse.FoodItem foodItem : response.getFood()) {
+                        Log.d("Food Item", foodItem.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.d("onFailureCallBack:", errorMessage);
+            }
+        });
 
     }
 
@@ -135,19 +156,22 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupLocation() {
         myLocation = new MyLocation(this);
+        Log.d("setupLocation: ", String.valueOf(myLocation==null));
         updateLocation();
     }
 
     private void updateLocation() {
+        Log.d( "updateLocation: ", "okay");
         double latitude = myLocation.getLatitude();
         double longitude = myLocation.getLongitude();
         String country = myLocation.getCountry();
         String city = myLocation.getCity();
-        locationText.setText("Longtitude: " + longitude + " Latitude: " + latitude);
-        addressText.setText("Address: " + country + ", " + city);
+//        locationText.setText("Longtitude: " + longitude + " Latitude: " + latitude);
+//        addressText.setText("Address: " + country + ", " + city);
 
         // Update the user's location in the backend
         GPSLocation location = new GPSLocation(latitude, longitude, city, country);
         userService.updateUserLocation(location);
+        Log.d("userService", "okay");
     }
 }

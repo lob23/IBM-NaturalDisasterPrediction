@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -59,101 +60,53 @@ public class SuppliersService {
     }
 
 
-    //    public void sendToServer() {
-//        try {
-//            // Create URL object192.168.102.24
-//            URL url = new URL("https://10.0.2.2:3000/weather/getsuppliers");
-//
-//            // Open connection
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setRequestMethod("POST");
-//            conn.setRequestProperty("Content-Type", "application/json");
-//            conn.setDoOutput(true);
-//
-//            // Convert object to JSON using Gson
-//            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//            String jsonInputString = gson.toJson(this);
-//            Log.d("sendToServer: ",jsonInputString);
-//
-//            // Write the JSON data to the request body
-//            try (OutputStream os = conn.getOutputStream()) {
-//                byte[] input = jsonInputString.getBytes("utf-8");
-//                os.write(input, 0, input.length);
-//            }
-//
-//            // Check the response code
-//            int responseCode = conn.getResponseCode();
-//            if (responseCode == HttpURLConnection.HTTP_OK) {
-//                System.out.println("Data sent successfully.");
-//            } else {
-//                System.out.println("POST request failed. Response code: " + responseCode);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-    public void sendToServer() {
+    public void sendToServer(SupplierResponseCallback callback) {
         // Convert this SuppliersService object to JSON
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(this);
         Log.d("sendToServer: ", json);
 
         // Send the JSON to the server
-        sendFileToServer(json);
+        sendFileToServer(json, callback);
 
     }
 
-    public void sendFileToServer(String json) {
+    public void sendFileToServer(String json, SupplierResponseCallback callback) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)  // Connection timeout
+                .writeTimeout(30, TimeUnit.SECONDS)    // Write timeout
+                .readTimeout(30, TimeUnit.SECONDS)     // Read timeout
+                .build();
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.102.24:3000/").addConverterFactory(GsonConverterFactory.create()).build();
-
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.32:3000/")
+                .client(okHttpClient)  // Use the custom client with timeout settings
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         SupplierApi apiService = retrofit.create(SupplierApi.class);
 
         // Create RequestBody from JSON string
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
 
-        Call<SupplierResponse> call = apiService.sendSuppliers(requestBody);
 
+        Call<SupplierResponse> call = apiService.sendSuppliers(requestBody);
         call.enqueue(new retrofit2.Callback<SupplierResponse>() {
             @Override
             public void onResponse(Call<SupplierResponse> call, retrofit2.Response<SupplierResponse> response) {
-                Log.d("onResponse raw: ", response.raw().toString());
+                Log.d("isSuccessful:", response.toString());
                 if (response.isSuccessful() && response.body() != null) {
-                    // Get the JSON response mapped to the SupplierResponse model
-                    SupplierResponse supplierResponse = response.body();
+                    SupplierResponse supplierResponse = response.body();  // Save response if needed.
                     Log.d("onResponse: ", supplierResponse.toString());
-
-                    // Access food items
-                    if (supplierResponse.getFood() != null) {
-                        for (SupplierResponse.FoodItem foodItem : supplierResponse.getFood()) {
-                            Log.d("Food Item", foodItem.toString());
-                        }
-                    }
-
-                    // Access clothing items
-                    if (supplierResponse.getClothing() != null) {
-                        for (SupplierResponse.ClothingItem clothingItem : supplierResponse.getClothing()) {
-                            Log.d("Clothing Item", clothingItem.toString());
-                        }
-                    }
-
-                    // Access other supplies
-                    if (supplierResponse.getOtherSupplies() != null) {
-                        for (SupplierResponse.OtherSupplyItem otherSupplyItem : supplierResponse.getOtherSupplies()) {
-                            Log.d("Other Supply Item", otherSupplyItem.toString());
-                        }
-                    }
-
-
+                    callback.onSuccess(supplierResponse);  // Pass response to callback.
                 } else {
-                    Log.e("sendToServer", "POST request failed. Response code: " + response.code());
+                    callback.onFailure("POST request failed. Response code: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<SupplierResponse> call, Throwable t) {
-                Log.e("sendToServer", "Network error: " + t.getMessage());
+                Log.d("ditconme", "ma");
+                callback.onFailure("Network error: " + t.getMessage());
             }
         });
     }
@@ -166,4 +119,5 @@ public class SuppliersService {
 
 
 }
+
 
