@@ -42,11 +42,7 @@ public class HomeBasic extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-//        TextView locationText=findViewById(R.id.locationText);
-//        locationText.setText(myLocation.getCity() + ", " + myLocation.getCountry());
-//
-//        TextView desription = findViewById(R.id.description);
-//        desription.setText("The sky is beautiful in your area, but not everywhere. Let’s help those in need!");
+
 
         setupLocation(); // tam thoi
 
@@ -86,16 +82,26 @@ public class HomeBasic extends AppCompatActivity {
         double longitude = myLocation.getLongitude();
         String country = myLocation.getCountry();
         String city = myLocation.getCity();
-//        locationText.setText("Longtitude: " + longitude + " Latitude: " + latitude);
-//        addressText.setText("Address: " + country + ", " + city);
         TextView locationText=findViewById(R.id.locationText);
         locationText.setText(myLocation.getCity() + ", " + myLocation.getCountry());
 
         TextView desription = findViewById(R.id.description);
         desription.setText("The sky is beautiful in your area, but not everywhere. Let’s help those in need!");
+    }
 
-        // Update the user's location in the backend
-//        GPSLocation location = new GPSLocation(latitude, longitude, city, country);
-//        userService.updateUserLocation(location);
+    private void fetchData() {
+        weatherService.getCurrentWeather(new WeatherService.WeatherCallback() {
+            @Override
+            public void onSuccess(List<Weather> weatherConditions) {
+                // Update UI with the weather data
+                Log.d("TEST WEATHER: ", weatherConditions.toString());
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // Handle the error, e.g., show a toast message
+                Log.d("TEST WEATHER ERROR: ", e.getMessage());
+            }
+        });
     }
 }
