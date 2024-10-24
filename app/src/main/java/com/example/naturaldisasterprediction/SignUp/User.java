@@ -26,7 +26,7 @@ public class User {
     public User(){
         this.name = "Shiba";
         this.gender = 2;
-        this.birth = LocalDate.of(20224, Month.OCTOBER, 16);
+        this.birth = LocalDate.of(2024, Month.OCTOBER, 16);
         this.weight = 0.0F;
         this.height = 0.0F;
         this.family = new ArrayList<>();

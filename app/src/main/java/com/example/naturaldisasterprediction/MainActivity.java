@@ -11,7 +11,10 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.naturaldisasterprediction.Home.MyLocation;
+import com.example.naturaldisasterprediction.Home.SendUser;
 import com.example.naturaldisasterprediction.Home.Weather;
+import com.example.naturaldisasterprediction.Service.SuppliersService;
 import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.Service.WeatherService;
 import com.example.naturaldisasterprediction.SignUp.PhoneScreen;
@@ -20,7 +23,10 @@ import com.example.naturaldisasterprediction.SignUp.SupportScreen;
 import com.example.naturaldisasterprediction.SignUp.TestView;
 import com.example.naturaldisasterprediction.SignUp.User;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     TextView addressText;
     private WeatherService weatherService;
     private UserService userService;
+    private SuppliersService suppliersService;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -37,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        Intent i = new Intent(MainActivity.this, TestView.class);
-        startActivity(i);
+//        Intent i = new Intent(MainActivity.this, TestView.class);
+//        startActivity(i);
+        testGetSuppliers();
 
 //        locationText = findViewById(R.id.locationText);
 //        addressText = findViewById(R.id.addressText);
@@ -67,8 +75,27 @@ public class MainActivity extends AppCompatActivity {
     });
 
     }
+    private void testGetSuppliers()
+    {
+        double latitude = 10.82302;
+        double longitude= 106.62965;
+        int day = 5;
+        ArrayList<User> user=new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            User sendUser = new User();
+            sendUser.setName("User");
+            sendUser.setGender(i%2);
+            sendUser.setWeight(60.0f+i*5);
+            sendUser.setHeight(160.0f+i*5);
+            user.add(sendUser);
+            LocalDate randomBirthdate = generateRandomBirthdate();
+            sendUser.setBirth(randomBirthdate);
 
+        }
+        SuppliersService suppliersService = new SuppliersService(user, latitude, longitude, day);
+        suppliersService.sendToServer();
 
+    }
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 //        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -96,4 +123,19 @@ public class MainActivity extends AppCompatActivity {
 //        locationText.setText("Longtitude: " + longitude + " Latitude: " + latitude);
 //        addressText.setText("Address: " + country + ", " + city);
 //    }
+
+
+    public LocalDate generateRandomBirthdate() {
+        LocalDate startDate = LocalDate.now().minusYears(60); // 60 years ago
+        LocalDate endDate = LocalDate.now().minusYears(20); // 20 years ago
+
+        long startEpochDay = startDate.toEpochDay();
+        long endEpochDay = endDate.toEpochDay();
+
+        // Generate random epoch day between the start and end dates
+        long randomDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
+
+        // Create a LocalDate from the random epoch day
+        return LocalDate.ofEpochDay(randomDay);
+    }
 }

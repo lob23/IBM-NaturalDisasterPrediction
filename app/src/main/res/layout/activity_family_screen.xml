@@ -21,43 +21,43 @@
         android:gravity="center"
         android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/Title4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeightWeight"
-        android:layout_marginTop="20dp"
-        android:text="Your Family"
-        android:fontFamily="@font/fredoka_medium"
-        android:textSize="30sp"
-        android:gravity="center"/>
+<!--    <TextView-->
+<!--        android:id="@+id/Title4"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/layoutHeightWeight"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Your Family"-->
+<!--        android:fontFamily="@font/fredoka_medium"-->
+<!--        android:textSize="30sp"-->
+<!--        android:gravity="center"/>-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutFamilyNo"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/Title4"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        app:boxStrokeColor="@color/blue_mint"
-        app:hintTextColor="@color/blue_mint"
-        app:endIconMode="clear_text">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/layoutFamilyNo"-->
+<!--        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/Title4"-->
+<!--        android:paddingStart="25dp"-->
+<!--        android:paddingEnd="25dp"-->
+<!--        app:boxStrokeColor="@color/blue_mint"-->
+<!--        app:hintTextColor="@color/blue_mint"-->
+<!--        app:endIconMode="clear_text">-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputFamilyNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:fontFamily="@font/fredoka"
-            android:hint="How many people in your family?"
-            android:maxLines="1"
-            android:inputType="number"
-            android:textColor="@color/blue_deep"
-            android:shadowColor="@color/blue_deep"/>
-    </com.google.android.material.textfield.TextInputLayout>
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/inputFamilyNo"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="14sp"-->
+<!--            android:fontFamily="@font/fredoka"-->
+<!--            android:hint="How many people in your family?"-->
+<!--            android:maxLines="1"-->
+<!--            android:inputType="number"-->
+<!--            android:textColor="@color/blue_text"-->
+<!--            android:shadowColor="@color/blue_text"/>-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
 
