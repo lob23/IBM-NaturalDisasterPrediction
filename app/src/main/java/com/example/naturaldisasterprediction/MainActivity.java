@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.naturaldisasterprediction.Home.HomeBasic;
 import com.example.naturaldisasterprediction.Home.MyLocation;
 import com.example.naturaldisasterprediction.Home.SendUser;
 import com.example.naturaldisasterprediction.Home.Weather;
@@ -51,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //
-        Intent i = new Intent(MainActivity.this, FamilyScreen.class);
+        Intent i = new Intent(MainActivity.this, HomeBasic.class);
         startActivity(i);
 
-        locationText = findViewById(R.id.locationText);
-        addressText = findViewById(R.id.addressText);
-        weatherService = new WeatherService(this);
-        userService = new UserService(this);
+//        locationText = findViewById(R.id.locationText);
+//        addressText = findViewById(R.id.addressText);
+//        weatherService = new WeatherService(this);
+//        userService = new UserService(this);
 //
 //        fetchData();
 //        setupLocation();
@@ -100,33 +101,7 @@ public class MainActivity extends AppCompatActivity {
         suppliersService.sendToServer();
 
     }
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                // Permission granted, create an instance of MyLocation and update the UI
-//                setupLocation();
-//            } else {
-//                // Permission denied, handle it gracefully
-//                locationText.setText("Permission denied.");
-//            }
-//        }
-//    }
-//
-//    private void setupLocation() {
-//        myLocation = new MyLocation(this);
-//        updateLocation();
-//    }
-//
-//    private void updateLocation() {
-//        double latitude = myLocation.getLatitude();
-//        double longitude = myLocation.getLongitude();
-//        String country = myLocation.getCountry();
-//        String city = myLocation.getCity();
-//        locationText.setText("Longtitude: " + longitude + " Latitude: " + latitude);
-//        addressText.setText("Address: " + country + ", " + city);
-//    }
+
 
 
     public LocalDate generateRandomBirthdate() {
@@ -141,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a LocalDate from the random epoch day
         return LocalDate.ofEpochDay(randomDay);
+    }
+
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -154,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private void setupLocation() {
         myLocation = new MyLocation(this);
         updateLocation();
