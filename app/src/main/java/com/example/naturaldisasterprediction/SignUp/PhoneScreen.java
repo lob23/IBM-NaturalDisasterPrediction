@@ -89,8 +89,6 @@ public class PhoneScreen extends AppCompatActivity {
             user.setPhone(fullPhoneNumber);
             shareUser();
             handleButton();
-            // Optionally save the user object back to SharedPreferences if needed
-
         }
     }
 

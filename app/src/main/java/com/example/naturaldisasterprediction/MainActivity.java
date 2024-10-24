@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//
-        Intent i = new Intent(MainActivity.this, HomeBasic.class);
+
+        Intent i = new Intent(MainActivity.this, RegisterInfo.class);
         startActivity(i);
 //
 //        locationText = findViewById(R.id.locationText);
@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupLocation();
         fetchData();
-
-        testGetSuppliers();
     }
 
     private void fetchData() {
@@ -84,62 +82,60 @@ public class MainActivity extends AppCompatActivity {
     });
 
     }
-    private void testGetSuppliers()
-    {
-        double latitude = 10.82302;
-        double longitude= 106.62965;
-        int day = 5;
-        ArrayList<User> user=new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            User sendUser = new User();
-            sendUser.setName("User");
-            sendUser.setGender(i%2);
-            sendUser.setWeight(60.0f+i*5);
-            sendUser.setHeight(160.0f+i*5);
-            user.add(sendUser);
-            LocalDate randomBirthdate = generateRandomBirthdate();
-            sendUser.setBirth(randomBirthdate);
-
-        }
-        Log.d("testGetSuppliers: ", "okay");
-        SuppliersService suppliersService = new SuppliersService(user, latitude, longitude, day);
-
-        suppliersService.sendToServer(new SupplierResponseCallback() {
-            @Override
-            public void onSuccess(SupplierResponse response) {
-                Log.d("onResponse: ", response.toString());
-                if (response.getFood() != null) {
-                    for (SupplierResponse.FoodItem foodItem : response.getFood()) {
-                        Log.d("Food Item", foodItem.toString());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Log.d("onFailureCallBack:", errorMessage);
-            }
-        });
-
-    }
-
-
-
-    public LocalDate generateRandomBirthdate() {
-        LocalDate startDate = LocalDate.now().minusYears(60); // 60 years ago
-        LocalDate endDate = LocalDate.now().minusYears(20); // 20 years ago
-
-        long startEpochDay = startDate.toEpochDay();
-        long endEpochDay = endDate.toEpochDay();
-
-        // Generate random epoch day between the start and end dates
-        long randomDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
-
-        // Create a LocalDate from the random epoch day
-        return LocalDate.ofEpochDay(randomDay);
-    }
-
-
+//    private void testGetSuppliers()
+//    {
+//        double latitude = 10.82302;
+//        double longitude= 106.62965;
+//        int day = 5;
+//        ArrayList<User> user=new ArrayList<>();
+//        for (int i = 1; i <= 5; i++) {
+//            User sendUser = new User();
+//            sendUser.setName("User");
+//            sendUser.setGender(i%2);
+//            sendUser.setWeight(60.0f+i*5);
+//            sendUser.setHeight(160.0f+i*5);
+//            user.add(sendUser);
+//            LocalDate randomBirthdate = generateRandomBirthdate();
+//            sendUser.setBirth(randomBirthdate);
+//
+//        }
+//        Log.d("testGetSuppliers: ", "okay");
+//        SuppliersService suppliersService = new SuppliersService(user, latitude, longitude, day);
+//
+//        suppliersService.sendToServer(new SupplierResponseCallback() {
+//            @Override
+//            public void onSuccess(SupplierResponse response) {
+//                Log.d("onResponse: ", response.toString());
+//                if (response.getFood() != null) {
+//                    for (SupplierResponse.FoodItem foodItem : response.getFood()) {
+//                        Log.d("Food Item", foodItem.toString());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String errorMessage) {
+//                Log.d("onFailureCallBack:", errorMessage);
+//            }
+//        });
+//
+//    }
+//
+//
+//
+//    public LocalDate generateRandomBirthdate() {
+//        LocalDate startDate = LocalDate.now().minusYears(60); // 60 years ago
+//        LocalDate endDate = LocalDate.now().minusYears(20); // 20 years ago
+//
+//        long startEpochDay = startDate.toEpochDay();
+//        long endEpochDay = endDate.toEpochDay();
+//
+//        // Generate random epoch day between the start and end dates
+//        long randomDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
+//
+//        // Create a LocalDate from the random epoch day
+//        return LocalDate.ofEpochDay(randomDay);
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
