@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,43 +75,52 @@ public class WeatherService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private List<Weather> handleWeatherArray(JSONArray jsonArray) throws JSONException {
         List<Weather> res = new ArrayList<>();
-        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime currentTimeUTC = ZonedDateTime.now(ZoneId.of("UTC")).toLocalDateTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         boolean check = false;
+
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject weatherItem = jsonArray.getJSONObject(i);
             String dtTxt = weatherItem.getString("dt_txt");
             LocalDateTime weatherDate = LocalDateTime.parse(dtTxt, formatter);
+            String dateCheck = getDatePart(dtTxt);
 
-            if(!check && weatherDate.toLocalDate().isEqual(currentTime.toLocalDate()) && i == 0){
+            // First weather item of the current day in UTC
+            if (!check && weatherDate.toLocalDate().isEqual(currentTimeUTC.toLocalDate()) && i == 0) {
                 check = true;
-                JSONObject main = weatherItem.getJSONObject("main");
-                int temp = (int) (main.getDouble("temp") - 273.15); // Convert Kelvin to Celsius
-                JSONArray jsonArray1 = weatherItem.getJSONArray("weather");
-                JSONObject jsonObject2 = jsonArray1.getJSONObject(0);
-                int id = jsonObject2.getInt("id");
-                Weather weather = new Weather(temp, id, dtTxt);
-                res.add(weather);
+                res.add(createWeather(weatherItem, dtTxt));
             }
 
+            // Add weather if it's 15:00 and falls within 5 days from the current time
+            if (check && weatherDate.getHour() == 15 &&
+                    weatherDate.isAfter(currentTimeUTC) &&
+                    weatherDate.isBefore(currentTimeUTC.plusDays(5)) &&
+                    !getDatePart(res.get(0).getTime()).equals(dateCheck)) {
 
-
-            if (check && weatherDate.getHour() == 15 && weatherDate.isAfter(currentTime) && weatherDate.isBefore(currentTime.plusDays(5))) {
-                JSONObject main = weatherItem.getJSONObject("main");
-                int temp = (int) (main.getDouble("temp") - 273.15); // Convert Kelvin to Celsius
-                JSONArray jsonArray1 = weatherItem.getJSONArray("weather");
-                JSONObject jsonObject2 = jsonArray1.getJSONObject(0);
-                int id = jsonObject2.getInt("id");
-                Weather weather = new Weather(temp, id, dtTxt);
-
-                res.add(weather);
+                res.add(createWeather(weatherItem, dtTxt));
             }
         }
+
         return res;
     }
+
+    private Weather createWeather(JSONObject weatherItem, String dtTxt) throws JSONException {
+        JSONObject main = weatherItem.getJSONObject("main");
+        int temp = (int) (main.getDouble("temp") - 273.15); // Convert Kelvin to Celsius
+        JSONArray weatherArray = weatherItem.getJSONArray("weather");
+        int id = weatherArray.getJSONObject(0).getInt("id");
+
+        return new Weather(temp, id, dtTxt);
+    }
+
     public interface WeatherCallback {
         void onSuccess(List<Weather> weatherConditions);
         void onError(Exception e);
+    }
+
+    public String getDatePart(String dateTime) {
+        // Extract the date part before the 'T'
+        return dateTime.substring(0, dateTime.indexOf(' '));
     }
 }

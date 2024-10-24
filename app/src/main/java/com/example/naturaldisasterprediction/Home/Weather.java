@@ -10,4 +10,16 @@ public class Weather{
         this.id = id;
         this.time = time;
     }
+
+    public int getTemp() {
+        return temp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTime() {
+        return time;
+    }
 }

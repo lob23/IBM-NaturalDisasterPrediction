@@ -1,36 +1,36 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <!-- Input for number of family members -->
-    <EditText
-        android:id="@+id/et_family_members"
+    <!-- RecyclerView to display list of items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Add button at the bottom -->
+    <TextView
+        android:id="@+id/btn_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter number of family members"
-        android:inputType="number" />
-
-    <!-- Button to generate the forms -->
-    <Button
-        android:id="@+id/btn_generate_forms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Generate Forms" />
-
-    <!-- ScrollView to hold the dynamic forms -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <!-- This LinearLayout will hold all the dynamic forms -->
-        <LinearLayout
-            android:id="@+id/ll_family_forms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-</LinearLayout>
+        android:text="Add"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/fredoka_medium"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/button2"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="25dp"
+        android:paddingVertical="10dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
