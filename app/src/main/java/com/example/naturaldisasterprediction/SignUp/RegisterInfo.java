@@ -62,20 +62,17 @@ public class RegisterInfo extends AppCompatActivity {
     private void handleButton() {
 
         checkInput();
-        if(fullfill){
-            button.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onClick(View v) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
 
-//                    shareUser();
-//                    upUserToServer();
+                shareUser();
 
-                    Intent i = new Intent(RegisterInfo.this, SupportScreen.class);
-                    startActivity(i);
-                }
-            });
-        }
+                Intent i = new Intent(RegisterInfo.this, SupportScreen.class);
+                startActivity(i);
+            }
+        });
 
 
     }
@@ -105,10 +102,12 @@ public class RegisterInfo extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void upUserToServer() {
+    private void createUser() {
         String gender = inputGender.getText().toString();
         String name = inputName.getText().toString();
         String email = inputEmail.getText().toString();
+        float height = sliderHeight.getValue();
+        float weight = sliderWeight.getValue();
 
         user = new User();
         user.setName(name);
@@ -119,12 +118,16 @@ public class RegisterInfo extends AppCompatActivity {
             user.setGender(2);
         }
         user.setBirth(localDate);
-//        userService.createUser(user);
+        user.setHeight(height);
+        user.setWeight(weight);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void shareUser() {
+        createUser();
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(User.class, this);
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_COLLECTION_USERS);
+//        userService.createUser(user);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
