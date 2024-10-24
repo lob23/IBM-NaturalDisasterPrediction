@@ -117,8 +117,16 @@ public class UserService {
             return;
         }
 
-        // Create request
-        String token = FirebaseMessaging.getInstance().getToken().toString();
+        // Create request body
+        String token = getFCMToken();
+
+        if(token == null){
+            Log.d("UPDATE LOCATION", "TOKEN IS NULL");
+            return;
+        }
+
+        Log.d("UPDATE LOCATION", token);
+
         Date updateDate = new Date();
         UserUpdateLocationRequest userUpdateLocationRequest = new UserUpdateLocationRequest(location, token, updateDate);
 
@@ -142,5 +150,27 @@ public class UserService {
                         Log.d("UPDATE LOCATION", "FAILED");
                     }
                 });
+    }
+
+    // Write function to get FCM token
+    private String getFCMToken() {
+        final String[] tokenHolder = new String[1];
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("FCM TOKEN", "Fetching FCM registration token failed", task.getException());
+                            tokenHolder[0] = null;
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.d("FCM TOKEN", token);
+                        tokenHolder[0] = token;
+                    }
+                });
+        return tokenHolder[0];
     }
 }
