@@ -2,10 +2,10 @@ package com.example.naturaldisasterprediction.Home;
 
 public class Weather{
     private int temp;
-    private int id;
+    private String id;
     private String time;
 
-    public Weather(int temp, int id, String time){
+    public Weather(int temp, String id, String time){
         this.temp = temp;
         this.id = id;
         this.time = time;
@@ -15,7 +15,7 @@ public class Weather{
         return temp;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

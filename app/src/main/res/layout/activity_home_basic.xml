@@ -46,6 +46,7 @@
             android:layout_height="300dp"
             android:layout_marginBottom="28dp"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/homeTop"
             android:paddingHorizontal="50dp">
 
@@ -57,6 +58,7 @@
                 android:gravity="top"
                 android:text="ho_chi_minh"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:fontFamily="@font/fredoka"
                 android:textColor="@color/blue_text"/>
 
@@ -66,6 +68,8 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+
                 android:text="clear_skies"
                 app:layout_constraintTop_toBottomOf="@+id/locationText"
                 app:layout_constraintTop_toTopOf="@+id/locationText"
@@ -79,6 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="clear_skies is goo"
+                app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toBottomOf="@+id/weather"
                 android:fontFamily="@font/fredoka"
                 android:textColor="@color/blue_text"/>
@@ -88,6 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/communityHomeBtn"
+                app:layout_constraintStart_toStartOf="parent"
+
                 android:background="@drawable/button_home"
                 app:layout_constraintTop_toTopOf="@+id/description"
                 android:layout_marginTop="50dp">
@@ -125,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/currentDay"
+                app:layout_constraintStart_toStartOf="parent"
                 android:text="5 days forecast"
                 android:fontFamily="@font/fredoka_medium"
                 android:textSize="18dp"
@@ -136,6 +145,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/temp"
                     android:text="20"
+                    app:layout_constraintStart_toStartOf="parent"
+
                     android:fontFamily="@font/fredoka_semibold"
                     app:layout_constraintTop_toBottomOf="@id/currentDay"
                     android:textSize="40dp">
@@ -146,16 +157,20 @@
                 android:layout_height="wrap_content"
                 android:text="Sunny"
                 android:id="@+id/TempDescription"
+                app:layout_constraintStart_toStartOf="parent"
                 android:fontFamily="@font/fredoka_medium"
                 app:layout_constraintTop_toBottomOf="@id/temp">
 
             </TextView>
             <ImageView
+                android:src="@drawable/_10d"
+                android:id="@+id/currentWeather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
+
 
             </ImageView>
 
@@ -179,6 +194,7 @@
             android:paddingHorizontal="20dp">
 
             <TextView
+                android:id="@+id/textForecast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5 days forecast"
@@ -187,10 +203,233 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="20dp">
+
             </TextView>
 <!--Include trong đây-->
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/textForecast"
+               android:layout_marginTop="10dp">
+
+               <LinearLayout
+                   android:id="@+id/firstDay"
+                   android:gravity="center_vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:textAlignment="center"
+                       android:id="@+id/firstDayDate"
+                       android:fontFamily="@font/fredoka_medium"
+                       android:textSize="16sp"
+
+                      />
+                   <ImageView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:src="@drawable/_10d"
+                       android:id="@+id/firstDayImage"
+                       android:layout_height="50dp"/>
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:id="@+id/firstDayTemp"
+                       android:textAlignment="center"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+                       />
+
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_marginTop="10dp"
+                   android:id="@+id/thirdDay"
+                   android:gravity="center_vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toBottomOf="@id/secondDay"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:textAlignment="center"
+                       android:id="@+id/thirdDayDate"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+
+                       />
+                   <ImageView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:src="@drawable/_10d"
+                       android:id="@+id/thirdDayImage"
+                       android:layout_height="50dp"/>
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:id="@+id/thirdDayTemp"
+                       android:textAlignment="center"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+
+                       />
+
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_marginTop="10dp"
+                   android:id="@+id/fourthDay"
+                   android:gravity="center_vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toBottomOf="@id/thirdDay"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:textAlignment="center"
+                       android:id="@+id/fourthDayDate"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+
+                       />
+                   <ImageView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:src="@drawable/_10d"
+                       android:id="@+id/fourthDayImage"
+                       android:layout_height="50dp"/>
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:id="@+id/fourthDayTemp"
+                       android:textAlignment="center"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+
+                       />
+
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_marginTop="10dp"
+                   android:id="@+id/fifthDay"
+                   android:gravity="center_vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toBottomOf="@id/fourthDay"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:textAlignment="center"
+                       android:id="@+id/fifthDayDate"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+                       />
+                   <ImageView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:src="@drawable/_10d"
+                       android:id="@+id/fifthDayImage"
+                       android:layout_height="50dp"/>
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:id="@+id/fifthDayTemp"
+                       android:textAlignment="center"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+                       />
+
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_marginTop="10dp"
+                   android:id="@+id/secondDay"
+                   android:gravity="center_vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toBottomOf="@id/firstDay"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:textAlignment="center"
+                       android:id="@+id/secondDayDate"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+                       />
+                   <ImageView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:src="@drawable/_10d"
+                       android:id="@+id/secondDayImage"
+                       android:layout_height="50dp"/>
+                   <TextView
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="hello"
+                       android:id="@+id/secondDayTemp"
+                       android:textAlignment="center"
+                       android:textSize="16sp"
+                       android:fontFamily="@font/fredoka_medium"
+
+                       />
+
+               </LinearLayout>
+
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
