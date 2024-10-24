@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/decor1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="20dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutInputName"
@@ -156,8 +156,178 @@
             android:clickable="true"
             android:cursorVisible="false"/>
     </com.google.android.material.textfield.TextInputLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutInputHeight"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutInputGender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp">
+
+        <!-- Title for Height -->
+        <TextView
+            android:id="@+id/Title7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Height: "
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"
+            android:layout_marginStart="12dp" />
+
+        <TextView
+            android:id="@+id/heightValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/Title7"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="5dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/Title7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Min Value TextView for Height -->
+            <TextView
+                android:id="@+id/minHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                android:text="0"
+                android:textSize="20sp"
+                android:fontFamily="@font/fredoka"/>
+
+            <!-- Slider for Height -->
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/minHeight"
+                app:layout_constraintEnd_toStartOf="@id/maxHeight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="30dp"
+                android:valueFrom="0"
+                android:valueTo="200"
+                app:thumbColor="@color/blue_text"
+                app:trackColor="@color/blue_mint"
+                app:trackColorInactive="@color/white"
+                android:stepSize="5"/>
+
+            <!-- Max Value TextView for Height -->
+            <TextView
+                android:id="@+id/maxHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="200"
+                android:textSize="20sp"
+                android:fontFamily="@font/fredoka"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutInputWeight"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutInputHeight">
+
+        <!-- Title for Height -->
+        <TextView
+            android:id="@+id/Title8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/fredoka"
+            android:text="Weight: "
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/weightValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Title8"
+            android:layout_marginStart="5dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/fredoka"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Title8">
+
+            <!-- Min Value TextView for Height -->
+            <TextView
+                android:id="@+id/minWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/fredoka"
+                android:text="0"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Slider for Height -->
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:stepSize="5"
+                android:valueFrom="0"
+                android:valueTo="200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/maxWeight"
+                app:layout_constraintStart_toEndOf="@id/minWeight"
+                app:layout_constraintTop_toTopOf="parent"
+                app:thumbColor="@color/blue_text"
+                app:trackColor="@color/blue_mint"
+                app:trackColorInactive="@color/white" />
+
+            <!-- Max Value TextView for Height -->
+            <TextView
+                android:id="@+id/maxWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fredoka"
+                android:text="200"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/saveUserButton"
         android:layout_width="match_parent"
@@ -175,10 +345,5 @@
         android:textSize="20sp"
         android:fontFamily="@font/fredoka_medium"
         android:gravity="center"
-        android:clickable="false"
-        />
-
-
-
-
+        android:clickable="false" />
 </androidx.constraintlayout.widget.ConstraintLayout>

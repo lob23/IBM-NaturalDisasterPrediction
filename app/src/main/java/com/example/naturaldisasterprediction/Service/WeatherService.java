@@ -109,7 +109,7 @@ public class WeatherService {
         JSONObject main = weatherItem.getJSONObject("main");
         int temp = (int) (main.getDouble("temp") - 273.15); // Convert Kelvin to Celsius
         JSONArray weatherArray = weatherItem.getJSONArray("weather");
-        int id = weatherArray.getJSONObject(0).getInt("id");
+        int id = weatherArray.getJSONObject(0).getInt("icon");
 
         return new Weather(temp, id, dtTxt);
     }

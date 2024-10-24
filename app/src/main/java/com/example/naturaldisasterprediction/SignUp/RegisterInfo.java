@@ -25,6 +25,7 @@ import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.SharedPreferenceManager;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
@@ -43,6 +44,8 @@ public class RegisterInfo extends AppCompatActivity {
     TextView button;
     UserService userService = new UserService(this);
     Boolean fullfill = false;
+    TextView heightVal, weightVal;
+    Slider sliderHeight, sliderWeight;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +68,8 @@ public class RegisterInfo extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    shareUser();
-                    upUserToServer();
+//                    shareUser();
+//                    upUserToServer();
 
                     Intent i = new Intent(RegisterInfo.this, SupportScreen.class);
                     startActivity(i);
@@ -83,8 +86,11 @@ public class RegisterInfo extends AppCompatActivity {
         String dob = inputDOB.getText().toString().trim();
         String gender = inputGender.getText().toString().trim();
 
-        // Check if all fields are filled
-        if (!name.isEmpty() && !email.isEmpty() && !dob.isEmpty() && !gender.isEmpty()) {
+        float height = sliderHeight.getValue();
+        float weight = sliderWeight.getValue();
+
+        // Check if all fields are filled and sliders have valid values
+        if (!name.isEmpty() && !email.isEmpty() && !dob.isEmpty() && !gender.isEmpty() && height > 0 && weight > 0) {
             // Enable the button and change its drawable
             button.setBackgroundResource(R.drawable.button2);
             button.setClickable(true); // Make the button clickable
@@ -94,6 +100,7 @@ public class RegisterInfo extends AppCompatActivity {
             // Disable the button or reset its background if not all fields are filled
             button.setBackgroundResource(R.drawable.button1); // or your default button drawable
             button.setClickable(false);
+            fullfill = false;
         }
     }
 
@@ -176,7 +183,20 @@ public class RegisterInfo extends AppCompatActivity {
             }
         });
 
-//        String dob = inputDOB.getText().toString();
+        heightVal.setText("0 cm");
+        weightVal.setText("0 kg");
+
+        // Listen for changes in the height slider and update the height value TextView
+        sliderHeight.addOnChangeListener((slider, value, fromUser) -> {
+           heightVal.setText(String.format("%.0f cm", value));
+           checkInput();
+        });
+
+        // Listen for changes in the weight slider and update the weight value TextView
+        sliderWeight.addOnChangeListener((slider, value, fromUser) -> {
+           weightVal.setText(String.format("%.0f kg", value));
+           checkInput();
+        });
 
     }
 
@@ -186,6 +206,10 @@ public class RegisterInfo extends AppCompatActivity {
         inputName = findViewById(R.id.inputName);
         inputEmail = findViewById(R.id.inputEmail);
         button = findViewById(R.id.saveUserButton);
+        heightVal = findViewById(R.id.heightValue);
+        weightVal = findViewById(R.id.weightValue);
+        sliderHeight = findViewById(R.id.sliderHeight);
+        sliderWeight = findViewById(R.id.sliderWeight);
 
         // Adding text watchers to detect input changes
         inputName.addTextChangedListener(inputWatcher);
