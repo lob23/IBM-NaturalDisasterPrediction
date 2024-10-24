@@ -1,5 +1,7 @@
 package com.example.naturaldisasterprediction.Home;
 
+import static com.example.naturaldisasterprediction.Constant.KEY_COLLECTION_USERS;
+
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -17,7 +19,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.naturaldisasterprediction.Models.GPSLocation;
 import com.example.naturaldisasterprediction.R;
+import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.Service.WeatherService;
+import com.example.naturaldisasterprediction.SharedPreferenceManager;
+import com.example.naturaldisasterprediction.SignUp.User;
 
 import org.w3c.dom.Text;
 
@@ -32,6 +37,8 @@ public class HomeBasic extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     MyLocation myLocation;
     private WeatherService weatherService;
+    User user;
+    UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,9 @@ public class HomeBasic extends AppCompatActivity {
         setContentView(R.layout.activity_home_basic);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         weatherService = new WeatherService(this);
+        userService = new UserService(this);
+
+        getUser();
 
         fetchData();
         setupLocation(); // tam thoi
@@ -55,6 +65,11 @@ public class HomeBasic extends AppCompatActivity {
         TextView currentDay = findViewById(R.id.currentDay);
         currentDay.setText(formattedDate);
 
+    }
+
+    private void getUser() {
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(User.class, this);
+        user = (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
 
     @Override
@@ -82,10 +97,15 @@ public class HomeBasic extends AppCompatActivity {
         String country = myLocation.getCountry();
         String city = myLocation.getCity();
         TextView locationText=findViewById(R.id.locationText);
-        locationText.setText(myLocation.getCity() + ", " + myLocation.getCountry());
+//        locationText.setText(myLocation.getCity() + ", " + myLocation.getCountry());
+//
+//        TextView desription = findViewById(R.id.description);
+//        desription.setText("The sky is beautiful in your area, but not everywhere. Let’s help those in need!");
 
-        TextView desription = findViewById(R.id.description);
-        desription.setText("The sky is beautiful in your area, but not everywhere. Let’s help those in need!");
+//        userService = new UserService(this);
+        userService.createUser(user);
+        GPSLocation location = new GPSLocation(latitude, longitude, city, country);
+        userService.updateUserLocation(location);
     }
 
     private void fetchData() {

@@ -1,5 +1,8 @@
 package com.example.naturaldisasterprediction.Service;
 
+import static com.example.naturaldisasterprediction.Constant.USER_ID_KEY;
+import static com.example.naturaldisasterprediction.Constant.USER_PREF;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Debug;
@@ -49,9 +52,6 @@ public class UserService {
     private Context context;
     private User user;
 
-    private static final String PREFS_NAME = "UserPrefs";
-    private static final String USER_ID_KEY = "UserId";
-
     public UserService(Context context){
         this.context = context;
     }
@@ -67,21 +67,21 @@ public class UserService {
 
     public void createUser(User user){
         Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://192.168.1.2:3000")
+//                .baseUrl("http://192.168.1.18:3000")
                 .baseUrl("http://10.0.2.2:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
 
-        requestUser.postUser(new RequestPost(user.getName(), user.getMail(), "112233"))
+        requestUser.postUser(new RequestPost(user.getName(), user.getMail(), user.getPhone()))
                 .enqueue(new Callback<ResponsePost>() {
                     @Override
                     public void onResponse(Call<ResponsePost> call, Response<ResponsePost> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             // Save user id to shared preferences
                             String userId = response.body().getUserId();
-                            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(USER_ID_KEY, userId);
                             editor.apply();
@@ -98,7 +98,7 @@ public class UserService {
     public void updateUserLocation(GPSLocation location) {
 
         // Get user id from shared preferences
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE);
         String userId = sharedPreferences.getString(USER_ID_KEY,  null);
 
         // If user id is null, return
@@ -113,6 +113,7 @@ public class UserService {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:3000")
+//                .baseUrl("http://192.168.1.18:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
