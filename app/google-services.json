@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324605009848",
+    "project_id": "ibm-server",
+    "storage_bucket": "ibm-server.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324605009848:android:2daa26121493cb5ccb794d",
+        "android_client_info": {
+          "package_name": "com.example.naturaldisasterprediction"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-9b2Xxvvlm2l-tW_o7Qp-unoR5RjxXIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

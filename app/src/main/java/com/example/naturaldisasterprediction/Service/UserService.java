@@ -1,5 +1,8 @@
 package com.example.naturaldisasterprediction.Service;
 
+import static com.example.naturaldisasterprediction.Constant.USER_ID_KEY;
+import static com.example.naturaldisasterprediction.Constant.USER_PREF;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Debug;
@@ -48,12 +51,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UserService {
     private Context context;
     private User user;
-
     private static final String PREFS_NAME = "UserPrefs";
     private static final String USER_ID_KEY = "UserId";
 
     public UserService(Context context){
         this.context = context;
+    }
+
+    private void saveUserIdToLocal(String userId) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_ID_KEY, userId);
+        editor.apply();
+    }
+
+    public String getUserIdFromLocal() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(USER_ID_KEY, null);
     }
 
     interface RequestUser{
@@ -67,24 +81,22 @@ public class UserService {
 
     public void createUser(User user){
         Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://192.168.1.2:3000")
+//                .baseUrl("http://192.168.1.18:3000")
                 .baseUrl("http://10.0.2.2:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
 
-        requestUser.postUser(new RequestPost(user.getName(), user.getMail(), "112233"))
+        requestUser.postUser(new RequestPost(user.getName(), user.getMail(), user.getPhone()))
                 .enqueue(new Callback<ResponsePost>() {
                     @Override
                     public void onResponse(Call<ResponsePost> call, Response<ResponsePost> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             // Save user id to shared preferences
                             String userId = response.body().getUserId();
-                            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(USER_ID_KEY, userId);
-                            editor.apply();
+                            Log.d("USER ID", userId);
+                            saveUserIdToLocal(userId);
                         }
                     }
 
@@ -95,24 +107,30 @@ public class UserService {
                 });
     }
 
-    public void updateUserLocation(GPSLocation location) {
+    public void sendUpdateLocation(GPSLocation location, String token) {
 
         // Get user id from shared preferences
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString(USER_ID_KEY,  null);
+        String userId = getUserIdFromLocal();
 
         // If user id is null, return
         if (userId == null) {
             return;
         }
 
-        // Create request
-        String token = FirebaseMessaging.getInstance().getToken().toString();
+        // Create request body
+        if(token == null){
+            Log.d("UPDATE LOCATION", "TOKEN IS NULL");
+            return;
+        }
+
+        Log.d("UPDATE LOCATION", token);
+
         Date updateDate = new Date();
         UserUpdateLocationRequest userUpdateLocationRequest = new UserUpdateLocationRequest(location, token, updateDate);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:3000")
+//                .baseUrl("http://192.168.1.18:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -128,6 +146,24 @@ public class UserService {
                     @Override
                     public void onFailure(Call<GeneralResponse> call, Throwable t) {
                         Log.d("UPDATE LOCATION", "FAILED");
+                    }
+                });
+    }
+    
+    public void updateUserLocation(GPSLocation location) {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("FCM TOKEN", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.d("FCM TOKEN", token);
+                        sendUpdateLocation(location, token);
                     }
                 });
     }

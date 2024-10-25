@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.example.naturaldisasterprediction.Home.HomeBasic;
 import com.example.naturaldisasterprediction.MyAdapter;
 import com.example.naturaldisasterprediction.R;
+import com.example.naturaldisasterprediction.Service.UserService;
 import com.example.naturaldisasterprediction.SharedPreferenceManager;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class FamilyScreen extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView addbtn, nextbtn;
     User user;
+    UserService userService;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,8 +47,17 @@ public class FamilyScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 retrieveFamilyInfo();
+                shareUser();
+//                createUser();
+                Log.d("SHIBA", "shiba");
+                Intent i = new Intent(FamilyScreen.this, HomeBasic.class);
+                startActivity(i);
             }
         });
+    }
+
+    private void createUser() {
+        userService.createUser(user);
     }
 
     private void getUser() {
@@ -59,6 +71,7 @@ public class FamilyScreen extends AppCompatActivity {
         itemList.add(new User());  // Add one family member (User) with default values
 
         myAdapter = new MyAdapter(this, itemList, getSupportFragmentManager());
+        userService = new UserService(this);
 
         // Set up RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,6 +81,11 @@ public class FamilyScreen extends AppCompatActivity {
         addbtn.setOnClickListener(v -> {
             myAdapter.addItem();
         });
+    }
+
+    private void shareUser(){
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(User.class, this);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_COLLECTION_USERS);
     }
 
     private void fetchUI() {

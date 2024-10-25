@@ -65,6 +65,7 @@ public class User {
     public Float getHeight(){return this.height; }
     public List<User> getFamily(){return this.family; }
     public String getMail(){ return this.email; }
+    public String getPhone(){ return this.phone; }
 
     public JSONObject toJson(){
         JSONObject jsonObject = new JSONObject();
