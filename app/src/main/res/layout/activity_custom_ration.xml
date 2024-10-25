@@ -3,9 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SignUp.CustomRation">
+    android:layout_height="150dp"
+    tools:context=".SignUp.CustomRation"
+    android:padding="20dp">
 
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/itemName"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:text="Rice"
+    android:fontFamily="@font/fredoka_semibold"
+    android:textColor="@color/blue_text"
+    android:textSize="30dp"
+    >
+
+</TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemDescription"
+        android:text="Description"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemName"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/blue_text"
+        android:textSize="24dp"
+        android:fontFamily="@font/fredoka"
+        >
+
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quantity"
+        android:text="10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fontFamily="@font/fredoka_semibold"
+        android:textSize="40dp"
+        android:textColor="@color/blue_text">
+
+    </TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
