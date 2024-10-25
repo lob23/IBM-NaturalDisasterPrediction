@@ -10,9 +10,7 @@
 - [Presentation materials](#presentation-materials)
   - [Solution demo video](#solution-demo-video)
   - [Project development roadmap](#project-development-roadmap)
-- [How to run the project](#How to run the project)
-  - [How to run the project](#how-to-run-the-project)
-  - [Live demo](#live-demo)
+- [How to run the project](#how-to-run-the-project)
 
 ## Project summary
 
@@ -75,9 +73,7 @@ See below for our proposed schedule on next steps after Call for Code 2024 submi
 
 <img width="406" alt="RoadMap" src="https://github.com/user-attachments/assets/aa24298a-9af2-44c3-a58f-6df7992160b2">
 
-## Additional details
-
-### How to run the project
+## How to run the project
 
 You have to run the project on separated sides: Server side and Client side.
 For server, 
