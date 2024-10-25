@@ -169,30 +169,21 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            android:text="Bottle"
+                            android:text="Bottle Water x 10 "
                             android:fontFamily="@font/fredoka_medium"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             android:textColor="@color/blue_text" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textSize="48sp"
-                            android:fontFamily="@font/fredoka_medium"
-                            android:textColor="@color/blue_text"
-                            app:layout_constraintStart_toEndOf="@id/TitleTip1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginHorizontal="20dp"/>
+
 
                         <TextView
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@id/TitleTip1"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:text="Staying hydrated by drinking water"
+                            android:text="Water is crucial for hydration, body functions, and overall survival."
                             android:fontFamily="@font/fredoka_medium"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:textColor="@color/blue_text"
                             android:layout_marginTop="8dp"/>
 
@@ -202,6 +193,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginRight="50dp"
                             android:src="@drawable/tip1"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -258,6 +250,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/babyblue_line_decor"
                         android:paddingHorizontal="10dp"
+
                         android:paddingVertical="15dp">
 
                         <ImageView
@@ -267,18 +260,8 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginLeft="50dp"
                             android:src="@drawable/tip4"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3"
-                            android:textSize="48sp"
-                            android:fontFamily="@font/fredoka_medium"
-                            android:textColor="@color/blue_text"
-                            app:layout_constraintStart_toEndOf="@id/image4"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginHorizontal="20dp"/>
 
 
                         <TextView
@@ -288,9 +271,9 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginEnd="20dp"
-                            android:text="Topical medicine"
+                            android:text="Topical medicine x 2"
                             android:fontFamily="@font/fredoka_medium"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             android:textColor="@color/blue_text" />
 
                         <TextView
@@ -301,7 +284,7 @@
                             android:layout_marginEnd="20dp"
                             android:text="Topical medicine is essential in a hurricane for treating cuts, burns, and infections from debris."
                             android:fontFamily="@font/fredoka_medium"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:textColor="@color/blue_text"
                             android:layout_marginTop="8dp"/>
 
@@ -322,20 +305,11 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            android:text="Towel"
+                            android:text="Towel x 3"
                             android:fontFamily="@font/fredoka_medium"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             android:textColor="@color/blue_text" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textSize="48sp"
-                            android:fontFamily="@font/fredoka_medium"
-                            android:textColor="@color/blue_text"
-                            app:layout_constraintStart_toEndOf="@id/TitleTip3"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginHorizontal="20dp"/>
+
 
                         <TextView
                             android:layout_width="150dp"
@@ -344,7 +318,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             android:text="A towel is essential during a hurricane for warmth, quick drying, and absorbing excess water."
                             android:fontFamily="@font/fredoka_medium"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:textColor="@color/blue_text"
                             android:layout_marginTop="8dp"/>
 
@@ -354,6 +328,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginRight="50dp"
                             android:src="@drawable/tip3"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
