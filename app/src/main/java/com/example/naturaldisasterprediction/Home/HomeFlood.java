@@ -34,14 +34,14 @@ public class HomeFlood extends AppCompatActivity {
         setContentView(R.layout.activity_home_flood);
 
         // Initialize the RecyclerView
-        recyclerView = findViewById(R.id.rationList);
+//        recyclerView = findViewById(R.id.rationList);
 
         // Storm and Flood status bar
         statusBarAbove = findViewById(R.id.HomeBasic_SafeTime);
         statusBarBelow = findViewById(R.id.HomeBasic_DangerTime);
 
 
-        int daysBeforeFlood = 2; // Before Storm
+        int daysBeforeFlood = 5; // Before Storm
         int daysDuringFlood = 6; // Duration of Storm + Flood
 
         float density = getResources().getDisplayMetrics().density;
@@ -80,7 +80,7 @@ public class HomeFlood extends AppCompatActivity {
 
         // Setup the adapter
         itemAdapter = new ItemAdapter(itemList);
-        recyclerView.setAdapter(itemAdapter);
+//        recyclerView.setAdapter(itemAdapter);
 
         // Handle window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

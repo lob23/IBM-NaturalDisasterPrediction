@@ -62,8 +62,8 @@ public class HomeBasic extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd-MM-yyyy");
         String formattedDate = dateFormat.format(calendar.getTime());
 
-        TextView currentDay = findViewById(R.id.currentDay);
-        currentDay.setText(formattedDate);
+//        TextView currentDay = findViewById(R.id.currentDay);
+//        currentDay.setText(formattedDate);
 
     }
 
@@ -97,9 +97,11 @@ public class HomeBasic extends AppCompatActivity {
         String country = myLocation.getCountry();
         String city = myLocation.getCity();
         TextView locationText=findViewById(R.id.locationText);
+//        locationText.setText(city);
 
 
-        userService.createUser(user);
+//        userService.createUser(user);
+
         GPSLocation location = new GPSLocation(latitude, longitude, city, country);
         userService.updateUserLocation(location);
     }
@@ -123,53 +125,55 @@ public class HomeBasic extends AppCompatActivity {
     }
     private void updateUI(List<Weather> weatherConditions)
     {
-        List<Integer> days=generateDays(5);
+        List<String> days=generateDays(5);
         TextView textViewCurrentDay = findViewById(R.id.temp);
-        textViewCurrentDay.setText(days.get(0).toString());
+        textViewCurrentDay.setText(String.valueOf(weatherConditions.get(0).getTemp()) + "°C");
         TextView textViewFirstDate= findViewById(R.id
                 .firstDayDate);
         TextView currentWeather = findViewById(R.id.weather);
         setWeatherText(currentWeather, weatherConditions.get(0).getId());
+        TextView tempDes = findViewById(R.id.TempDescription);
+        setWeatherText(tempDes,  weatherConditions.get(0).getId());
         ImageView imageViewCurrentDay= findViewById(R.id.currentWeather);
         setImageView(imageViewCurrentDay, weatherConditions.get(0).getId());
-        textViewFirstDate.setText(days.get(0).toString());
+        textViewFirstDate.setText(days.get(0));
         ImageView imageViewfirst=findViewById(R.id.firstDayImage);
         setImageView(imageViewfirst, weatherConditions.get(0).getId());
         TextView textViewFirstTemp=findViewById(R.id.firstDayTemp);
-        textViewFirstTemp.setText(String.valueOf(weatherConditions.get(0).getTemp()));
+        textViewFirstTemp.setText(String.valueOf(weatherConditions.get(0).getTemp()) + "°C");
 
 
 // Second Day
         TextView textViewSecondDate = findViewById(R.id.secondDayDate);
-        textViewSecondDate.setText(days.get(1).toString());
+        textViewSecondDate.setText(days.get(1));
         ImageView imageViewSecond = findViewById(R.id.secondDayImage);
         setImageView(imageViewSecond, weatherConditions.get(1).getId());
         TextView textViewSecondTemp = findViewById(R.id.secondDayTemp);
-        textViewSecondTemp.setText(String.valueOf(weatherConditions.get(1).getTemp()));
+        textViewSecondTemp.setText(String.valueOf(weatherConditions.get(1).getTemp()) + "°C");
 
 // Third Day
         TextView textViewThirdDate = findViewById(R.id.thirdDayDate);
-        textViewThirdDate.setText(days.get(2).toString());
+        textViewThirdDate.setText(days.get(2));
         ImageView imageViewThird = findViewById(R.id.thirdDayImage);
         setImageView(imageViewThird, weatherConditions.get(2).getId());
         TextView textViewThirdTemp = findViewById(R.id.thirdDayTemp);
-        textViewThirdTemp.setText(String.valueOf(weatherConditions.get(2).getTemp()));
+        textViewThirdTemp.setText(String.valueOf(weatherConditions.get(2).getTemp()) + "°C");
 
 // Fourth Day
         TextView textViewFourthDate = findViewById(R.id.fourthDayDate);
-        textViewFourthDate.setText(days.get(3).toString());
+        textViewFourthDate.setText(days.get(3));
         ImageView imageViewFourth = findViewById(R.id.fourthDayImage);
         setImageView(imageViewFourth, weatherConditions.get(3).getId());
         TextView textViewFourthTemp = findViewById(R.id.fourthDayTemp);
-        textViewFourthTemp.setText(String.valueOf(weatherConditions.get(3).getTemp()));
+        textViewFourthTemp.setText(String.valueOf(weatherConditions.get(3).getTemp()) + "°C");
 
 // Fifth Day
         TextView textViewFifthDate = findViewById(R.id.fifthDayDate);
-        textViewFifthDate.setText(days.get(4).toString());
+        textViewFifthDate.setText(days.get(4));
         ImageView imageViewFifth = findViewById(R.id.fifthDayImage);
         setImageView(imageViewFifth, weatherConditions.get(4).getId());
         TextView textViewFifthTemp = findViewById(R.id.fifthDayTemp);
-        textViewFifthTemp.setText(String.valueOf(weatherConditions.get(4).getTemp()));
+        textViewFifthTemp.setText(String.valueOf(weatherConditions.get(4).getTemp())+ "°C");
 
     }
     private void setTempDescription(String id1, TextView textView)
@@ -256,12 +260,13 @@ public class HomeBasic extends AppCompatActivity {
     }
             // Return the list of XML file names
 
-    public List<Integer> generateDays(int numberOfDays) {
-        List<Integer> dayList = new ArrayList<>();
+    public List<String> generateDays(int numberOfDays) {
+        List<String> dayList = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
 
         for (int i = 0; i < numberOfDays; i++) {
-            dayList.add(calendar.get(Calendar.DAY_OF_MONTH));
+            dayList.add(dateFormat.format(calendar.getTime()));
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 

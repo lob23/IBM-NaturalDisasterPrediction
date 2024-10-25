@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -48,16 +49,38 @@ public class FamilyScreen extends AppCompatActivity {
             public void onClick(View v) {
                 retrieveFamilyInfo();
                 shareUser();
-//                createUser();
-                Log.d("SHIBA", "shiba");
+                createUser();
+
                 Intent i = new Intent(FamilyScreen.this, HomeBasic.class);
                 startActivity(i);
+//                Log.d("SHIBA", "shiba");
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Intent i = new Intent(FamilyScreen.this, HomeBasic.class);
+//                        startActivity(i);
+//                    }
+//                }, 2000);
+
+//                Intent i = new Intent(FamilyScreen.this, HomeBasic.class);
+//                startActivity(i);
             }
         });
     }
 
     private void createUser() {
-        userService.createUser(user);
+        userService.createUser(user, new UserService.UserCreationCallback() {
+            @Override
+            public void onUserCreated() {
+                Intent i = new Intent(FamilyScreen.this, HomeBasic.class);
+                startActivity(i);
+            }
+
+            @Override
+            public void onUserCreationFailed() {
+
+            }
+        });
     }
 
     private void getUser() {

@@ -80,26 +80,28 @@ public class WeatherService {
 
         boolean check = false;
 
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for (int i = 0; i <5; i++) {
             JSONObject weatherItem = jsonArray.getJSONObject(i);
             String dtTxt = weatherItem.getString("dt_txt");
             LocalDateTime weatherDate = LocalDateTime.parse(dtTxt, formatter);
             String dateCheck = getDatePart(dtTxt);
 
-            // First weather item of the current day in UTC
-            if (!check && weatherDate.toLocalDate().isEqual(currentTimeUTC.toLocalDate()) && i == 0) {
-                check = true;
-                res.add(createWeather(weatherItem, dtTxt));
-            }
+            res.add(createWeather(weatherItem, dtTxt));
 
-            // Add weather if it's 15:00 and falls within 5 days from the current time
-            if (check && weatherDate.getHour() == 15 &&
-                    weatherDate.isAfter(currentTimeUTC) &&
-                    weatherDate.isBefore(currentTimeUTC.plusDays(5)) &&
-                    !getDatePart(res.get(0).getTime()).equals(dateCheck)) {
-
-                res.add(createWeather(weatherItem, dtTxt));
-            }
+//            // First weather item of the current day in UTC
+//            if (!check && weatherDate.toLocalDate().isEqual(currentTimeUTC.toLocalDate()) && i == 0) {
+//                check = true;
+//                res.add(createWeather(weatherItem, dtTxt));
+//            }
+//
+//            // Add weather if it's 15:00 and falls within 5 days from the current time
+//            if (check && weatherDate.getHour() == 15 &&
+//                    weatherDate.isAfter(currentTimeUTC) &&
+//                    weatherDate.isBefore(currentTimeUTC.plusDays(5)) &&
+//                    !getDatePart(res.get(0).getTime()).equals(dateCheck)) {
+//
+//                res.add(createWeather(weatherItem, dtTxt));
+//            }
         }
 
         return res;

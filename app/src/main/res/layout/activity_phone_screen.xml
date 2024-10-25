@@ -51,8 +51,8 @@
             android:id="@+id/editPhoneNumber"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/ccp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ccp"
             android:hint="Phone Number"
             android:inputType="number"/>
 
@@ -60,8 +60,8 @@
             android:id="@+id/validIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/editPhoneNumber"
+            app:layout_constraintTop_toBottomOf="@id/ccp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

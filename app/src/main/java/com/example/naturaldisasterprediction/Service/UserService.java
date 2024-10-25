@@ -1,9 +1,11 @@
 package com.example.naturaldisasterprediction.Service;
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.naturaldisasterprediction.Constant.USER_ID_KEY;
 import static com.example.naturaldisasterprediction.Constant.USER_PREF;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Debug;
 import android.util.Log;
@@ -16,12 +18,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.naturaldisasterprediction.Home.HomeBasic;
 import com.example.naturaldisasterprediction.Home.Weather;
 import com.example.naturaldisasterprediction.Models.GPSLocation;
 import com.example.naturaldisasterprediction.Models.GeneralResponse;
 import com.example.naturaldisasterprediction.Models.User.UserUpdateLocationRequest;
 import com.example.naturaldisasterprediction.RequestPost;
 import com.example.naturaldisasterprediction.ResponsePost;
+import com.example.naturaldisasterprediction.SignUp.FamilyScreen;
 import com.example.naturaldisasterprediction.SignUp.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -58,6 +62,11 @@ public class UserService {
         this.context = context;
     }
 
+    public interface UserCreationCallback{
+        void onUserCreated();
+        void onUserCreationFailed();
+    }
+
     private void saveUserIdToLocal(String userId) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -79,10 +88,10 @@ public class UserService {
 
     }
 
-    public void createUser(User user){
+    public void createUser(User user, UserCreationCallback callback){
         Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://192.168.1.18:3000")
-                .baseUrl("http://10.0.2.2:3000")
+                .baseUrl("http://192.168.1.18:3000")
+//                .baseUrl("http://10.0.2.2:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -97,12 +106,16 @@ public class UserService {
                             String userId = response.body().getUserId();
                             Log.d("USER ID", userId);
                             saveUserIdToLocal(userId);
+                            callback.onUserCreated();
+                        }
+                        else{
+                            callback.onUserCreationFailed();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponsePost> call, Throwable throwable) {
-
+                        callback.onUserCreationFailed();
                     }
                 });
     }
@@ -129,8 +142,8 @@ public class UserService {
         UserUpdateLocationRequest userUpdateLocationRequest = new UserUpdateLocationRequest(location, token, updateDate);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000")
-//                .baseUrl("http://192.168.1.18:3000")
+//                .baseUrl("http://10.0.2.2:3000")
+                .baseUrl("http://192.168.1.18:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -149,7 +162,7 @@ public class UserService {
                     }
                 });
     }
-    
+
     public void updateUserLocation(GPSLocation location) {
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {

@@ -16,7 +16,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/HomeFlood_top"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/locationText"
@@ -26,10 +29,12 @@
                 android:gravity="top"
                 android:text="Warning Flood Incoming"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:fontFamily="@font/fredoka_semibold"
                 android:textColor="@color/white"
                 android:textSize="40dp"
-                android:paddingLeft="20dp" />
+                android:paddingLeft="20dp"
+                android:translationZ="100dp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -54,16 +59,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:scaleType="centerCrop"
                 android:translationZ="5dp"
-                android:layout_marginBottom="-10dp" />
+                android:layout_marginBottom="-10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/wave_2"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:scaleType="centerCrop"
                 android:translationZ="1dp"
-                android:layout_marginBottom="-10dp" />
+                android:layout_marginBottom="-10dp"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -72,7 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/HomeFlood_top"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:paddingTop="30dp">
 
             <View
                 android:id="@+id/HomeBasic_DangerTime"
@@ -81,9 +92,10 @@
                 android:background="@drawable/rectangle_rd"
                 android:backgroundTint="@color/red_dam"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 />
+
 
             <View
                 android:id="@+id/HomeBasic_SafeTime"
@@ -91,20 +103,267 @@
                 android:layout_height="132dp"
                 android:background="@drawable/rectangle_rd"
                 android:backgroundTint="@color/blue_light"
-
-
+                app:layout_constraintTop_toTopOf="parent"
                app:layout_constraintStart_toStartOf="@id/HomeBasic_DangerTime"
                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="90sp"
+                android:fontFamily="@font/fredoka_medium"
+                app:layout_constraintStart_toStartOf="@id/HomeBasic_DangerTime"
+                app:layout_constraintTop_toTopOf="@id/HomeBasic_DangerTime"
+                android:layout_marginStart="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remaining Days of the Flood"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:fontFamily="@font/fredoka_medium"
+                app:layout_constraintStart_toStartOf="@id/HomeBasic_DangerTime"
+                app:layout_constraintBottom_toBottomOf="@id/HomeBasic_DangerTime"
+                android:layout_marginStart="10dp"/>
+
+
+<!--            <ScrollView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="400dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+
+
+<!--            </ScrollView>-->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeBasic_DangerTime"
+                android:paddingHorizontal="10dp"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <TextView
+                            android:id="@+id/TitleTip1"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Bottle"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textSize="16sp"
+                            android:textColor="@color/blue_text" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="48sp"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textColor="@color/blue_text"
+                            app:layout_constraintStart_toEndOf="@id/TitleTip1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginHorizontal="20dp"/>
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="Staying hydrated by drinking water"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textSize="12sp"
+                            android:textColor="@color/blue_text"
+                            android:layout_marginTop="8dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/tip1"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/LayoutTip2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@drawable/babyblue_line_decor"-->
+<!--                        android:paddingHorizontal="10dp"-->
+<!--                        android:paddingVertical="15dp">-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            android:src="@drawable/tip2"/>-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/TitleTip2"-->
+<!--                            android:layout_width="200dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_marginEnd="-20dp"-->
+<!--                            android:text="Wear Sunscreen to protect from hamrful UV Rays"-->
+<!--                            android:fontFamily="@font/fredoka_medium"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textColor="@color/black" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="200dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/TitleTip2"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_marginEnd="-20dp"-->
+<!--                            android:text="Maintain the foundation for          your beauty"-->
+<!--                            android:fontFamily="@font/fredoka_medium"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:layout_marginTop="8dp"/>-->
+
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <ImageView
+                            android:id="@+id/image4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginStart="15dp"
+                            android:src="@drawable/tip4"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="48sp"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textColor="@color/blue_text"
+                            app:layout_constraintStart_toEndOf="@id/image4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginHorizontal="20dp"/>
+
+
+                        <TextView
+                            android:id="@+id/TitleTip4"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginEnd="20dp"
+                            android:text="Topical medicine"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textSize="16sp"
+                            android:textColor="@color/blue_text" />
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip4"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="20dp"
+                            android:text="Topical medicine is essential in a hurricane for treating cuts, burns, and infections from debris."
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textSize="12sp"
+                            android:textColor="@color/blue_text"
+                            android:layout_marginTop="8dp"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <TextView
+                            android:id="@+id/TitleTip3"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Towel"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textSize="16sp"
+                            android:textColor="@color/blue_text" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="48sp"
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textColor="@color/blue_text"
+                            app:layout_constraintStart_toEndOf="@id/TitleTip3"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginHorizontal="20dp"/>
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="A towel is essential during a hurricane for warmth, quick drying, and absorbing excess water."
+                            android:fontFamily="@font/fredoka_medium"
+                            android:textSize="12sp"
+                            android:textColor="@color/blue_text"
+                            android:layout_marginTop="8dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/tip3"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- RecyclerView for displaying the list -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rationList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/HomeBasic_rec1"
-            android:layout_marginTop="20dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

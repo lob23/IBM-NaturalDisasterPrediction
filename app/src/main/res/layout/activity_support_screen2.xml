@@ -32,7 +32,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="150dp"
             android:layout_marginStart="25dp"
-            android:textColor="@color/black"
+            android:textColor="@color/blue_text"
             android:fontFamily="@font/fredoka_medium"
             android:text="We need your family information"
             android:textSize="36sp"/>
@@ -46,8 +46,9 @@
             android:layout_marginTop="300dp"
             android:text="To accurately predict food rations in case of an emergency, our app requires information about your family, including the number of members and their basic details. This data helps us assess the necessary resources and provide tailored predictions for your household’s needs in dangerous situations. We ensure that your family's information is handled securely, prioritizing privacy while offering vital assistance during critical times."
             android:fontFamily="@font/fredoka"
-            android:textSize="20sp"
-            android:paddingHorizontal="20dp"/>
+            android:textSize="14sp"
+            android:textColor="@color/blue_text"
+            android:paddingHorizontal="25dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
